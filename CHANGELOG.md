@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **`hb logs --format junit`** writes a JUnit XML test report of an
+  experiment, so CI systems show a red-team run next to the unit tests
+  (GitLab merge requests, Jenkins, Azure DevOps, CircleCI, Buildkite). Each
+  conversation is a test case, grouped into one test suite per attack
+  category. A `fail` verdict is a failure carrying the severity and the
+  judge's explanation, an `error` verdict is an error so it never reads as a
+  pass, and the transcript goes in `system-out`. Works in local and platform
+  mode, always exports every log (no paging), and honours `--verdict`.
+
+### Fixed
+- The GitLab CI example in the docs exported results only when the scan
+  passed: with `--fail-on` tripped, GitLab stops the script before the
+  export. It now keeps the exit code, writes the reports, then exits with it.
+
 ## [2.14.0] — 2026-10-30
 
 ### Added
